@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body style="background: linear-gradient(rgb(28, 227, 227),rgba(150, 236, 236, 0.987));">
+    <nav style="background: linear-gradient(rgb(214, 212, 212),rgb(185, 237, 240));" class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#">Weather</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About this app</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Delhi</a></li>
+                <li><a class="dropdown-item" href="#">Seattle</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Use Guid</a>
+            </li>
+            </ul>
+            <form class="d-flex" role="search">
+            <input id="city" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit" id="submit">Search</button>
+            </form>
+        </div>
+        </div>
+    </nav>
+
+
+
+<div class="container">
+    <h1 style="color:black; background: linear-gradient(rgb(1, 86, 86),aqua); color:black; border-radius: .6rem; " class="my-4 text-center ">Weather for <span id="cityName"></span></h1>
+    <main>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+
+            <!-- Temprature -->         
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div style="background: linear-gradient(rgb(1, 75, 75),rgb(2, 219, 219));" class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Temprature</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 style="color: rgb(255, 0, 0);" class="card-title pricing-card-title"><span id="temp2"></span><small class="text-body-secondary fw-light"></small>&#x2103</h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+
+                            <li>Temprature is <span id="temp"></span></li>
+                            <li>Min Temprature is <span id="min_temp"></span></li>
+                            <li>Max Temprature is <span id="max_temp"></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Humidity info.. -->
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div style="background: linear-gradient(rgb(1, 75, 75),rgb(2, 219, 219));" class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Humidity info..</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 style="color: rgb(0, 8, 255);" class="card-title pricing-card-title"><span id="humidity2"></span><small class="text-body-secondary fw-light">%</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+
+                            <li>Cloud_pct is <span id="cloud_pct"></span></li>
+                            <li>Feels_like is <span id="feels_like"></span></li>
+                            <li>Humidity is <span id="humidity"></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sun Info.. & Wind -->
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm ">
+                    <div style="background: linear-gradient(rgb(1, 75, 75),rgb(2, 219, 219));" class="card-header py-3 ">
+                        <h4 class="my-0 fw-normal">Sun Info.. & Wind</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 style="color: rgb(4, 209, 4);" class="card-title pricing-card-title"><span id="wind_speed2"></span><small class="text-body-secondary fw-light">km/h</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+
+                            <li>Sunrise is <span id="sunrise"></span></li>
+                            <li>Sunset is <span id="sunset"></span></li>
+                            <li>Wind_speed is <span id="wind_speed"></span></li>
+                            <li>Wind_degrees is <span id="wind_degrees"></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <h2 style="color: black;" class="display-6 text-center mb-4">Weather of other common places</h2> 
+        <div class="table-responsive">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th style="width: 34%; background: linear-gradient(rgb(1, 58, 58),aqua,aqua);"></th>
+                        <th style="width: 22%; background: linear-gradient(rgb(1, 58, 58),aqua,aqua);">Cloud_pct</th>
+                        <th style="width: 22%; background: linear-gradient(rgb(1, 58, 58),aqua,aqua);">Feels_like</th>
+                        <th style="width: 22%; background: linear-gradient(rgb(1, 58, 58),aqua,aqua);">Humidity</th>
+                        <th style="width: 22%; background: linear-gradient(rgb(1, 58, 58),aqua,aqua);">Max_temp</th>
+                        <th style="width: 22%; background: linear-gradient(rgb(1, 58, 58),aqua,aqua);">Min_temp</th>
+                        <th style="width: 22%; background: linear-gradient(rgb(1, 58, 58),aqua,aqua);">Sunrise</th>
+                        <th style="width: 22%; background: linear-gradient(rgb(1, 58, 58),aqua,aqua);">Sunset</th>
+                        <th style="width: 22%; background: linear-gradient(rgb(1, 58, 58),aqua,aqua);">Temp</th>
+                        <th style="width: 22%; background: linear-gradient(rgb(1, 58, 58),aqua,aqua);">Wind_degrees</th>
+                        <th style="width: 22%; background: linear-gradient(rgb(1, 58, 58),aqua,aqua);">Wind_speed</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <!-- Muzaffarpur -->
+                    <tr>
+                        <th style="background-color:gainsboro;" scope="row" class="text-start">Muzaffarpur</th>
+
+                        <td><span id="cloud_pct_3"></span></td>
+                        <td><span id="feels_like_3"></span></td>
+                        <td><span id="humidity_3"></span></td>
+                        <td><span id="max_temp_3"></span></td>
+                        <td><span id="min_temp_3"></span></td>
+                        <td><span id="sunrise_3"></span></td>
+                        <td><span id="sunset_3"></span></td>
+                        <td><span id="temp_3"></span></td>
+                        <td><span id="wind_degrees_3"></span></td>
+                        <td><span id="wind_speed_3"></span></td>
+                    </tr>
+
+                    <!-- Lucknow -->
+                    <tr>
+                        <th style="background-color: gainsboro;" scope="row" class="text-start">Lucknow</th>
+
+                        <td><span id="cloud_pct_4"></span></td>
+                        <td><span id="feels_like_4"></span></td>
+                        <td><span id="humidity_4"></span></td>
+                        <td><span id="max_temp_4"></span></td>
+                        <td><span id="min_temp_4"></span></td>
+                        <td><span id="sunrise_4"></span></td>
+                        <td><span id="sunset_4"></span></td>
+                        <td><span id="temp_4"></span></td>
+                        <td><span id="wind_degrees_4"></span></td>
+                        <td><span id="wind_speed_4"></span></td>
+                    </tr>
+
+                    <!-- Mumbai -->
+                    <tr>
+                        <th style="background-color:gainsboro;" scope="row" class="text-start">Mumbai</th>
+                        
+                        <td><span id="cloud_pct_5"></span></td>
+                        <td><span id="feels_like_5"></span></td>
+                        <td><span id="humidity_5"></span></td>
+                        <td><span id="max_temp_5"></span></td>
+                        <td><span id="min_temp_5"></span></td>
+                        <td><span id="sunrise_5"></span></td>
+                        <td><span id="sunset_5"></span></td>
+                        <td><span id="temp_5"></span></td>
+                        <td><span id="wind_degrees_5"></span></td>
+                        <td><span id="wind_speed_5"></span></td>
+                    </tr>
+
+                    <!-- Bangalore -->
+                    <tr>
+                        <th style="background-color:gainsboro;" scope="row" class="text-start">Bangalore</th>
+                        
+                        <td><span id="cloud_pct_6"></span></td>
+                        <td><span id="feels_like_6"></span></td>
+                        <td><span id="humidity_6"></span></td>
+                        <td><span id="max_temp_6"></span></td>
+                        <td><span id="min_temp_6"></span></td>
+                        <td><span id="sunrise_6"></span></td>
+                        <td><span id="sunset_6"></span></td>
+                        <td><span id="temp_6"></span></td>
+                        <td><span id="wind_degrees_6"></span></td>
+                        <td><span id="wind_speed_6"></span></td>
+                    </tr>
+
+                    <!-- Channi -->
+                    <tr>
+                        <th style="background-color:gainsboro;" scope="row" class="text-start">Channi</th>
+                        
+                        <td><span id="cloud_pct_7"></span></td>
+                        <td><span id="feels_like_7"></span></td>
+                        <td><span id="humidity_7"></span></td>
+                        <td><span id="max_temp_7"></span></td>
+                        <td><span id="min_temp_7"></span></td>
+                        <td><span id="sunrise_7"></span></td>
+                        <td><span id="sunset_7"></span></td>
+                        <td><span id="temp_7"></span></td>
+                        <td><span id="wind_degrees_7"></span></td>
+                        <td><span id="wind_speed_7"></span></td>
+                    </tr>
+
+                    <!-- Dehradun -->
+                    <tr>
+                        <th style="background-color:gainsboro;" scope="row" class="text-start">Dehradun</th>
+                        
+                        <td><span id="cloud_pct_8"></span></td>
+                        <td><span id="feels_like_8"></span></td>
+                        <td><span id="humidity_8"></span></td>
+                        <td><span id="max_temp_8"></span></td>
+                        <td><span id="min_temp_8"></span></td>
+                        <td><span id="sunrise_8"></span></td>
+                        <td><span id="sunset_8"></span></td>
+                        <td><span id="temp_8"></span></td>
+                        <td><span id="wind_degrees_8"></span></td>
+                        <td><span id="wind_speed_8"></span></td>
+                    </tr>
+
+                    <!-- Kolkata -->
+                    <tr>
+                        <th style="background-color:gainsboro;" scope="row" class="text-start">Kolkata</th>
+                        
+                        <td><span id="cloud_pct_9"></span></td>
+                        <td><span id="feels_like_9"></span></td>
+                        <td><span id="humidity_9"></span></td>
+                        <td><span id="max_temp_9"></span></td>
+                        <td><span id="min_temp_9"></span></td>
+                        <td><span id="sunrise_9"></span></td>
+                        <td><span id="sunset_9"></span></td>
+                        <td><span id="temp_9"></span></td>
+                        <td><span id="wind_degrees_9"></span></td>
+                        <td><span id="wind_speed_9"></span></td>
+                    </tr>
+
+                    <!-- Hyderabad -->
+                    <tr>
+                        <th style="background-color:gainsboro;" scope="row" class="text-start">Hyderabad</th>
+                
+                        <td><span id="cloud_pct_10"></span></td>
+                        <td><span id="feels_like_10"></span></td>
+                        <td><span id="humidity_10"></span></td>
+                        <td><span id="max_temp_10"></span></td>
+                        <td><span id="min_temp_10"></span></td>
+                        <td><span id="sunrise_10"></span></td>
+                        <td><span id="sunset_10"></span></td>
+                        <td><span id="temp_10"></span></td>
+                        <td><span id="wind_degrees_10"></span></td>
+                        <td><span id="wind_speed_10"></span></td>
+                    </tr>
+
+                    <!-- Dubai -->
+                    <tr>
+                        <th style="background-color:gainsboro;" scope="row" class="text-start">Dubai</th>
+                        
+                        <td><span id="cloud_pct_11"></span></td>
+                        <td><span id="feels_like_11"></span></td>
+                        <td><span id="humidity_11"></span></td>
+                        <td><span id="max_temp_11"></span></td>
+                        <td><span id="min_temp_11"></span></td>
+                        <td><span id="sunrise_11"></span></td>
+                        <td><span id="sunset_11"></span></td>
+                        <td><span id="temp_11"></span></td>
+                        <td><span id="wind_degrees_11"></span></td>
+                        <td><span id="wind_speed_11"></span></td>
+                    </tr>
+
+                    <!-- New York City -->
+                    <tr>
+                        <th style="background-color:gainsboro;" scope="row" class="text-start">New York City</th>
+                
+                        <td><span id="cloud_pct_12"></span></td>
+                        <td><span id="feels_like_12"></span></td>
+                        <td><span id="humidity_12"></span></td>
+                        <td><span id="max_temp_12"></span></td>
+                        <td><span id="min_temp_12"></span></td>
+                        <td><span id="sunrise_12"></span></td>
+                        <td><span id="sunset_12"></span></td>
+                        <td><span id="temp_12"></span></td>
+                        <td><span id="wind_degrees_12"></span></td>
+                        <td><span id="wind_speed_12"></span></td>
+                    </tr>
+
+                    <!-- Saudi Arabia -->
+                    <tr>
+                        <th style="background-color:gainsboro;" scope="row" class="text-start">Saudi Arabia</th>
+                        
+                        <td><span id="cloud_pct_13"></span></td>
+                        <td><span id="feels_like_13"></span></td>
+                        <td><span id="humidity_13"></span></td>
+                        <td><span id="max_temp_13"></span></td>
+                        <td><span id="min_temp_13"></span></td>
+                        <td><span id="sunrise_13"></span></td>
+                        <td><span id="sunset_13"></span></td>
+                        <td><span id="temp_13"></span></td>
+                        <td><span id="wind_degrees_13"></span></td>
+                        <td><span id="wind_speed_13"></span></td>
+                    </tr>
+
+                    <!-- Surat -->
+                    <tr>
+                        <th style="background-color:gainsboro;" scope="row" class="text-start">Surat</th>
+                        
+                        <td><span id="cloud_pct_14"></span></td>
+                        <td><span id="feels_like_14"></span></td>
+                        <td><span id="humidity_14"></span></td>
+                        <td><span id="max_temp_14"></span></td>
+                        <td><span id="min_temp_14"></span></td>
+                        <td><span id="sunrise_14"></span></td>
+                        <td><span id="sunset_14"></span></td>
+                        <td><span id="temp_14"></span></td>
+                        <td><span id="wind_degrees_14"></span></td>
+                        <td><span id="wind_speed_14"></span></td>
+                    </tr>
+
+                    <!-- Patna -->
+                    <tr>
+                        <th style="background-color:gainsboro;" scope="row" class="text-start">Patna</th>
+                        
+                        <td><span id="cloud_pct_15"></span></td>
+                        <td><span id="feels_like_15"></span></td>
+                        <td><span id="humidity_15"></span></td>
+                        <td><span id="max_temp_15"></span></td>
+                        <td><span id="min_temp_15"></span></td>
+                        <td><span id="sunrise_15"></span></td>
+                        <td><span id="sunset_15"></span></td>
+                        <td><span id="temp_15"></span></td>
+                        <td><span id="wind_degrees_15"></span></td>
+                        <td><span id="wind_speed_15"></span></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+
+
+<div class="foot">
+    <footer style="background: linear-gradient(rgb(214, 212, 212),rgb(185, 237, 240));" class="bd-footer py-4 py-md-5 mt-5 bg-body-tertiary">
+        <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary">
+        <div class="row">
+        <div class="col-lg-3 mb-3">
+            <a class="d-inline-flex align-items-center mb-2 text-body-emphasis text-decoration-none" href="/" aria-label="Bootstrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="d-block me-2" viewBox="0 0 118 94"></svg>
+                <span class="fs-5">Details</span>
+            </a>
+            <ul class="list-unstyled small">
+                <li class="mb-2">
+                    Designed and built by the <a href="https://github.com/MdMohsinHaider">Md Mohsin Haider </a>
+                    and github Profile</li>
+                <li class="mb-2">
+                    Code licensed <a href="" target="_blank" rel="license noopener">MIT</a>,
+                    docs <a href="" target="_blank" rel="license noopener">CC BY 3.0</a>.</li>
+                <li class="mb-2">Currently v5.3.0.</li>
+            </ul>
+            </div>
+            <div class="col-6 col-lg-2 offset-lg-1 mb-3">
+            <h5>Links</h5>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="/">Home</a></li>
+                <li class="mb-2"><a href="">Docs</a></li>
+                <li class="mb-2"><a href="">Examples</a></li>
+                <li class="mb-2"><a href="">Themes</a></li>
+                <li class="mb-2"><a href="">Blog</a></li>
+                <li class="mb-2"><a href="">Swag Store</a></li>
+            </ul>
+            </div>
+            <div class="col-6 col-lg-2 mb-3">
+            <h5>Guides</h5>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="">Getting started</a></li>
+                <li class="mb-2"><a href="">Start</a></li>
+                <li class="mb-2"><a href="">X</a></li>
+                <li class="mb-2"><a href="">Y</a></li>
+                <li class="mb-2"><a href="">Z</a></li>
+            </ul>
+            </div>
+            <div class="col-6 col-lg-2 mb-3">
+            <h5>Projects</h5>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="">Project_1</a></li>
+                <li class="mb-2"><a href="">Project_2</a></li>
+                <li class="mb-2"><a href="">Project_3</a></li>
+                <li class="mb-2"><a href="">Project_4</a></li>
+                <li class="mb-2"><a href="">Project_5</a></li>
+            </ul>
+            </div>
+            <div class="col-6 col-lg-2 mb-3">
+            <h5>Social Media Connect</h5>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="">Github</a></li>
+                <li class="mb-2"><a href="">Linkedin</a></li>
+                <li class="mb-2"><a href="">YouTube</a></li>
+                <li class="mb-2"><a href="">Twitter</a></li>
+                <li class="mb-2"><a href="">Facebook</a></li>
+            </ul>
+            </div>
+        </div>
+        </div>
+    </footer>
+</div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
